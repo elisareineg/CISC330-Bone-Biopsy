@@ -1,0 +1,8 @@
+case,targeting_error_mm,core_length_mm,insertion_depth_mm,status,passed
+intersects,0.6,1.5999999999999996,5.8,intersects,True
+tangent,1.0,0.0,5.0,contact,True
+miss,2.0,0.0,,miss,True
+behind,0.0,0.0,,behind,True
+inside,0.0,1.0,1.0,intersects,True
+surface_inward,0.0,2.0,2.0,intersects,True
+surface_outward,0.0,0.0,0.0,contact,True

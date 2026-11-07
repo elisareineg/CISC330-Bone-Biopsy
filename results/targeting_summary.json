@@ -1,0 +1,883 @@
+{
+  "stage": 5,
+  "n_per_sigma": 200000,
+  "seed": 335,
+  "independent_validation_seed": 10335,
+  "marker_sigma_per_coordinate_mm": 0.35771987425846213,
+  "diagram_unit_to_mm": 10.0,
+  "insertion_depth_mm": 100.0,
+  "error_threshold_mm": 3.0,
+  "required_probability": 0.95,
+  "target_sigma_grid_mm": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0,
+    1.1,
+    1.2,
+    1.3,
+    1.4,
+    1.5,
+    1.6,
+    1.7,
+    1.8,
+    1.9,
+    2.0,
+    2.1,
+    2.2,
+    2.3,
+    2.4,
+    2.5,
+    2.6,
+    2.7,
+    2.8,
+    2.9,
+    3.0
+  ],
+  "grid_step_mm": 0.1,
+  "primary_metric": "distance from noisy registered trajectory to displaced target",
+  "secondary_metric": "endpoint distance after 100 mm insertion",
+  "maximum_supported_grid_sigma_mm": null,
+  "conclusion": "No feasible target-displacement sigma: even sigma=0 fails; all sampled levels also fail.",
+  "baseline": {
+    "target_sigma_mm": 0.0,
+    "trajectory": {
+      "n": 200000,
+      "successes": 124334,
+      "success_probability": 0.62167,
+      "wilson95_low": 0.6195422442325323,
+      "wilson95_high": 0.6237930819542917,
+      "mean_error_mm": 2.741219199486291,
+      "median_error_mm": 2.5057615229902033,
+      "p95_error_mm": 5.639102597715488,
+      "status": "supported_fail"
+    },
+    "endpoint": {
+      "n": 200000,
+      "successes": 123561,
+      "success_probability": 0.617805,
+      "wilson95_low": 0.6156731405674534,
+      "wilson95_high": 0.6199323340889027,
+      "mean_error_mm": 2.7601615268869013,
+      "median_error_mm": 2.522929416863727,
+      "p95_error_mm": 5.649043862737624,
+      "status": "supported_fail"
+    }
+  },
+  "independent_baseline_validation": {
+    "trajectory": {
+      "n": 200000,
+      "successes": 124880,
+      "success_probability": 0.6244,
+      "wilson95_low": 0.622275229230784,
+      "wilson95_high": 0.6265199920862285,
+      "mean_error_mm": 2.736037567543284,
+      "median_error_mm": 2.496849734665356,
+      "p95_error_mm": 5.641771250222808,
+      "status": "supported_fail"
+    },
+    "endpoint": {
+      "n": 200000,
+      "successes": 124130,
+      "success_probability": 0.62065,
+      "wilson95_low": 0.6185211473451137,
+      "wilson95_high": 0.6227742180238379,
+      "mean_error_mm": 2.754967544808694,
+      "median_error_mm": 2.5146767837870994,
+      "p95_error_mm": 5.65311733749306,
+      "status": "supported_fail"
+    }
+  },
+  "target_only_analytic_sigma_limits_mm": {
+    "trajectory": 1.2256169479609047,
+    "endpoint": 1.0731596227753863
+  },
+  "versions": {
+    "numpy": "2.3.5",
+    "scipy": "1.17.0"
+  },
+  "sweep": [
+    {
+      "target_sigma_mm": 0.0,
+      "trajectory": {
+        "n": 200000,
+        "successes": 124334,
+        "success_probability": 0.62167,
+        "wilson95_low": 0.6195422442325323,
+        "wilson95_high": 0.6237930819542917,
+        "mean_error_mm": 2.741219199486291,
+        "median_error_mm": 2.5057615229902033,
+        "p95_error_mm": 5.639102597715488,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 123561,
+        "success_probability": 0.617805,
+        "wilson95_low": 0.6156731405674534,
+        "wilson95_high": 0.6199323340889027,
+        "mean_error_mm": 2.7601615268869013,
+        "median_error_mm": 2.522929416863727,
+        "p95_error_mm": 5.649043862737624,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.1,
+      "trajectory": {
+        "n": 200000,
+        "successes": 124258,
+        "success_probability": 0.62129,
+        "wilson95_low": 0.6191618344210312,
+        "wilson95_high": 0.6234135063630561,
+        "mean_error_mm": 2.7441346321747675,
+        "median_error_mm": 2.507284838316771,
+        "p95_error_mm": 5.644276198885989,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 123440,
+        "success_probability": 0.6172,
+        "wilson95_low": 0.6150675111415657,
+        "wilson95_high": 0.6193279867551696,
+        "mean_error_mm": 2.765658297953675,
+        "median_error_mm": 2.5262287133219523,
+        "p95_error_mm": 5.655468953800485,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.2,
+      "trajectory": {
+        "n": 200000,
+        "successes": 123877,
+        "success_probability": 0.619385,
+        "wilson95_low": 0.6172548008483406,
+        "wilson95_high": 0.6215106131141316,
+        "mean_error_mm": 2.7530207426490456,
+        "median_error_mm": 2.518337130735361,
+        "p95_error_mm": 5.65911232860876,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 122820,
+        "success_probability": 0.6141,
+        "wilson95_low": 0.6119643407046135,
+        "wilson95_high": 0.616231276275058,
+        "mean_error_mm": 2.782050564318973,
+        "median_error_mm": 2.542984293366334,
+        "p95_error_mm": 5.672933766504237,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.3,
+      "trajectory": {
+        "n": 200000,
+        "successes": 123045,
+        "success_probability": 0.615225,
+        "wilson95_low": 0.6130904806941064,
+        "wilson95_high": 0.6173550930699836,
+        "mean_error_mm": 2.767809917934194,
+        "median_error_mm": 2.531504667127529,
+        "p95_error_mm": 5.684764170513989,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 121605,
+        "success_probability": 0.608025,
+        "wilson95_low": 0.6058833919756944,
+        "wilson95_high": 0.6101624583681183,
+        "mean_error_mm": 2.808789284502502,
+        "median_error_mm": 2.5675801912627745,
+        "p95_error_mm": 5.701862041902659,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.4,
+      "trajectory": {
+        "n": 200000,
+        "successes": 121983,
+        "success_probability": 0.609915,
+        "wilson95_low": 0.6077752053136943,
+        "wilson95_high": 0.6120505724279411,
+        "mean_error_mm": 2.7884261487541173,
+        "median_error_mm": 2.551556647045344,
+        "p95_error_mm": 5.7212305796407525,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 119920,
+        "success_probability": 0.5996,
+        "wilson95_low": 0.5974507166947007,
+        "wilson95_high": 0.6017454572858014,
+        "mean_error_mm": 2.8452223712285165,
+        "median_error_mm": 2.599746957967711,
+        "p95_error_mm": 5.746034315902033,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.5,
+      "trajectory": {
+        "n": 200000,
+        "successes": 120525,
+        "success_probability": 0.602625,
+        "wilson95_low": 0.600478396065826,
+        "wilson95_high": 0.6047676617127786,
+        "mean_error_mm": 2.814662373175083,
+        "median_error_mm": 2.576332255729528,
+        "p95_error_mm": 5.7598459705760465,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 117805,
+        "success_probability": 0.589025,
+        "wilson95_low": 0.5868670176985941,
+        "wilson95_high": 0.5911795625083759,
+        "mean_error_mm": 2.8906560417582736,
+        "median_error_mm": 2.6432164346637137,
+        "p95_error_mm": 5.794439481871067,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.6,
+      "trajectory": {
+        "n": 200000,
+        "successes": 118874,
+        "success_probability": 0.59437,
+        "wilson95_low": 0.5922162851378006,
+        "wilson95_high": 0.596520089747139,
+        "mean_error_mm": 2.846328048568504,
+        "median_error_mm": 2.6088000886563516,
+        "p95_error_mm": 5.812643649635131,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 115228,
+        "success_probability": 0.57614,
+        "wilson95_low": 0.5739728078840061,
+        "wilson95_high": 0.5783042672854259,
+        "mean_error_mm": 2.9444253586598848,
+        "median_error_mm": 2.6951261102013246,
+        "p95_error_mm": 5.854123847507515,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.7,
+      "trajectory": {
+        "n": 200000,
+        "successes": 117117,
+        "success_probability": 0.585585,
+        "wilson95_low": 0.5834244103067271,
+        "wilson95_high": 0.5877423020438882,
+        "mean_error_mm": 2.8832417023032355,
+        "median_error_mm": 2.644343602795766,
+        "p95_error_mm": 5.874428678752045,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 112225,
+        "success_probability": 0.561125,
+        "wilson95_low": 0.5589489764413086,
+        "wilson95_high": 0.5632986755120869,
+        "mean_error_mm": 3.0058933832160983,
+        "median_error_mm": 2.756677256731228,
+        "p95_error_mm": 5.932564529678058,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.8,
+      "trajectory": {
+        "n": 200000,
+        "successes": 115034,
+        "success_probability": 0.57517,
+        "wilson95_low": 0.5730021758018754,
+        "wilson95_high": 0.5773349366289914,
+        "mean_error_mm": 2.9251529488525643,
+        "median_error_mm": 2.686977654309892,
+        "p95_error_mm": 5.948989146915371,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 108846,
+        "success_probability": 0.54423,
+        "wilson95_low": 0.5420464554353465,
+        "wilson95_high": 0.5464118455200512,
+        "mean_error_mm": 3.074451688823614,
+        "median_error_mm": 2.8257563625137463,
+        "p95_error_mm": 6.0161909280273775,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 0.9,
+      "trajectory": {
+        "n": 200000,
+        "successes": 112706,
+        "success_probability": 0.56353,
+        "wilson95_low": 0.5613552544295185,
+        "wilson95_high": 0.5657023051385667,
+        "mean_error_mm": 2.971816298836294,
+        "median_error_mm": 2.734841537319123,
+        "p95_error_mm": 6.030959359140637,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 104947,
+        "success_probability": 0.524735,
+        "wilson95_low": 0.5225459225457811,
+        "wilson95_high": 0.5269231272876296,
+        "mean_error_mm": 3.1495340803556204,
+        "median_error_mm": 2.9058064136225443,
+        "p95_error_mm": 6.1117303469789235,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.0,
+      "trajectory": {
+        "n": 200000,
+        "successes": 110212,
+        "success_probability": 0.55106,
+        "wilson95_low": 0.5488791896149435,
+        "wilson95_high": 0.5532388489738561,
+        "mean_error_mm": 3.022979996629049,
+        "median_error_mm": 2.787235182437385,
+        "p95_error_mm": 6.116891622996386,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 100580,
+        "success_probability": 0.5029,
+        "wilson95_low": 0.500708695849726,
+        "wilson95_high": 0.5050911927501078,
+        "mean_error_mm": 3.23062032735668,
+        "median_error_mm": 2.989488891080794,
+        "p95_error_mm": 6.21995383701273,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.1,
+      "trajectory": {
+        "n": 200000,
+        "successes": 107513,
+        "success_probability": 0.537565,
+        "wilson95_low": 0.5353791861906656,
+        "wilson95_high": 0.5397493707930447,
+        "mean_error_mm": 3.0784186657100228,
+        "median_error_mm": 2.8416256889946547,
+        "p95_error_mm": 6.212712632416959,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 95854,
+        "success_probability": 0.47927,
+        "wilson95_low": 0.47708099696095,
+        "wilson95_high": 0.48145979935816835,
+        "mean_error_mm": 3.3172350293538138,
+        "median_error_mm": 3.0799359973294225,
+        "p95_error_mm": 6.33096929375094,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.2,
+      "trajectory": {
+        "n": 200000,
+        "successes": 104646,
+        "success_probability": 0.52323,
+        "wilson95_low": 0.5210406347273329,
+        "wilson95_high": 0.5254184729189226,
+        "mean_error_mm": 3.137920797372245,
+        "median_error_mm": 2.901749311930736,
+        "p95_error_mm": 6.315604941243826,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 91082,
+        "success_probability": 0.45541,
+        "wilson95_low": 0.45322830208135856,
+        "wilson95_high": 0.4575934107922299,
+        "mean_error_mm": 3.408927261316625,
+        "median_error_mm": 3.175137991289808,
+        "p95_error_mm": 6.45023114027497,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.3,
+      "trajectory": {
+        "n": 200000,
+        "successes": 101605,
+        "success_probability": 0.508025,
+        "wilson95_low": 0.5058338428102573,
+        "wilson95_high": 0.5102158489185933,
+        "mean_error_mm": 3.2012357978918766,
+        "median_error_mm": 2.9644150014433945,
+        "p95_error_mm": 6.421271190799777,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 85968,
+        "success_probability": 0.42984,
+        "wilson95_low": 0.4276717419593212,
+        "wilson95_high": 0.43201095315642146,
+        "mean_error_mm": 3.505277082643928,
+        "median_error_mm": 3.2761900890232027,
+        "p95_error_mm": 6.5832471361428615,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.4,
+      "trajectory": {
+        "n": 200000,
+        "successes": 98644,
+        "success_probability": 0.49322,
+        "wilson95_low": 0.49102904638089184,
+        "wilson95_high": 0.49541121406501376,
+        "mean_error_mm": 3.2681342110019846,
+        "median_error_mm": 3.0289353925069897,
+        "p95_error_mm": 6.539516226924946,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 80993,
+        "success_probability": 0.404965,
+        "wilson95_low": 0.4028154851943113,
+        "wilson95_high": 0.4071181654659597,
+        "mean_error_mm": 3.6059047374836948,
+        "median_error_mm": 3.3814053214828443,
+        "p95_error_mm": 6.72803296539633,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.5,
+      "trajectory": {
+        "n": 200000,
+        "successes": 95555,
+        "success_probability": 0.477775,
+        "wilson95_low": 0.4755863073689237,
+        "wilson95_high": 0.47996454637890096,
+        "mean_error_mm": 3.338374343827883,
+        "median_error_mm": 3.098609988353221,
+        "p95_error_mm": 6.663982226979986,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 76114,
+        "success_probability": 0.38057,
+        "wilson95_low": 0.3784444362506677,
+        "wilson95_high": 0.3827001515154833,
+        "mean_error_mm": 3.7104586888558524,
+        "median_error_mm": 3.4894539125280915,
+        "p95_error_mm": 6.871188968815653,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.6,
+      "trajectory": {
+        "n": 200000,
+        "successes": 92511,
+        "success_probability": 0.462555,
+        "wilson95_low": 0.46037058734304254,
+        "wilson95_high": 0.4647408510635849,
+        "mean_error_mm": 3.4117615467611526,
+        "median_error_mm": 3.171122006164672,
+        "p95_error_mm": 6.794494518886269,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 71477,
+        "success_probability": 0.357385,
+        "wilson95_low": 0.3552874800651565,
+        "wilson95_high": 0.3594879983261156,
+        "mean_error_mm": 3.8186197325932665,
+        "median_error_mm": 3.602574998679709,
+        "p95_error_mm": 7.027913706487857,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.7,
+      "trajectory": {
+        "n": 200000,
+        "successes": 89571,
+        "success_probability": 0.447855,
+        "wilson95_low": 0.44567666524001504,
+        "wilson95_high": 0.4500353378502131,
+        "mean_error_mm": 3.488101194531477,
+        "median_error_mm": 3.2457727758095443,
+        "p95_error_mm": 6.927579794465655,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 67012,
+        "success_probability": 0.33506,
+        "wilson95_low": 0.33299454211216883,
+        "wilson95_high": 0.33713179386831305,
+        "mean_error_mm": 3.930097654155789,
+        "median_error_mm": 3.7155554858319153,
+        "p95_error_mm": 7.19894804082363,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.8,
+      "trajectory": {
+        "n": 200000,
+        "successes": 86551,
+        "success_probability": 0.432755,
+        "wilson95_low": 0.43058491381297664,
+        "wilson95_high": 0.4349276693263922,
+        "mean_error_mm": 3.5671978721637756,
+        "median_error_mm": 3.3239500302960927,
+        "p95_error_mm": 7.069873610270929,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 62688,
+        "success_probability": 0.31344,
+        "wilson95_low": 0.3114105426286769,
+        "wilson95_high": 0.31547662385925007,
+        "mean_error_mm": 4.044625096485931,
+        "median_error_mm": 3.8320266105400904,
+        "p95_error_mm": 7.371640804578785,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 1.9,
+      "trajectory": {
+        "n": 200000,
+        "successes": 83631,
+        "success_probability": 0.418155,
+        "wilson95_low": 0.41599484254833896,
+        "wilson95_high": 0.42031830143324544,
+        "mean_error_mm": 3.648863720110662,
+        "median_error_mm": 3.403181679104044,
+        "p95_error_mm": 7.223259511213241,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 58563,
+        "success_probability": 0.292815,
+        "wilson95_low": 0.2908246680069252,
+        "wilson95_high": 0.29481329076666596,
+        "mean_error_mm": 4.161959460132611,
+        "median_error_mm": 3.9511624139399295,
+        "p95_error_mm": 7.553331893595883,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.0,
+      "trajectory": {
+        "n": 200000,
+        "successes": 80607,
+        "success_probability": 0.403035,
+        "wilson95_low": 0.4008871770275195,
+        "wilson95_high": 0.40518654777148255,
+        "mean_error_mm": 3.7329311829500855,
+        "median_error_mm": 3.4827976115714696,
+        "p95_error_mm": 7.379779469868682,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 54566,
+        "success_probability": 0.27283,
+        "wilson95_low": 0.27088229926751156,
+        "wilson95_high": 0.27478642720687946,
+        "mean_error_mm": 4.281877211689572,
+        "median_error_mm": 4.070579264870313,
+        "p95_error_mm": 7.739150977537677,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.1,
+      "trajectory": {
+        "n": 200000,
+        "successes": 77753,
+        "success_probability": 0.388765,
+        "wilson95_low": 0.3866307647330958,
+        "wilson95_high": 0.39090350823155134,
+        "mean_error_mm": 3.8192360303162727,
+        "median_error_mm": 3.5660473867759412,
+        "p95_error_mm": 7.539825473485773,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 50863,
+        "success_probability": 0.254315,
+        "wilson95_low": 0.2524112110426334,
+        "wilson95_high": 0.2562282266641974,
+        "mean_error_mm": 4.404174061058037,
+        "median_error_mm": 4.191266580157731,
+        "p95_error_mm": 7.933923264591077,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.2,
+      "trajectory": {
+        "n": 200000,
+        "successes": 74925,
+        "success_probability": 0.374625,
+        "wilson95_low": 0.3725061288456811,
+        "wilson95_high": 0.3767486872908104,
+        "mean_error_mm": 3.9076255449752906,
+        "median_error_mm": 3.6505650697193563,
+        "p95_error_mm": 7.708407200166493,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 47455,
+        "success_probability": 0.237275,
+        "wilson95_low": 0.23541564012628002,
+        "wilson95_high": 0.23914445215256136,
+        "mean_error_mm": 4.528664346970146,
+        "median_error_mm": 4.3157319436695625,
+        "p95_error_mm": 8.13638714619638,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.3,
+      "trajectory": {
+        "n": 200000,
+        "successes": 72183,
+        "success_probability": 0.360915,
+        "wilson95_low": 0.35881287035140036,
+        "wilson95_high": 0.36302247243897984,
+        "mean_error_mm": 3.997962119202593,
+        "median_error_mm": 3.7383920994315254,
+        "p95_error_mm": 7.878633687977029,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 44270,
+        "success_probability": 0.22135,
+        "wilson95_low": 0.2195358953772162,
+        "wilson95_high": 0.22317480864219244,
+        "mean_error_mm": 4.655180231652126,
+        "median_error_mm": 4.441654870787293,
+        "p95_error_mm": 8.341029687424234,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.4,
+      "trajectory": {
+        "n": 200000,
+        "successes": 69518,
+        "success_probability": 0.34759,
+        "wilson95_low": 0.3455059232816146,
+        "wilson95_high": 0.34967993137332193,
+        "mean_error_mm": 4.09012183536888,
+        "median_error_mm": 3.8246802149941717,
+        "p95_error_mm": 8.05618534859363,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 41266,
+        "success_probability": 0.20633,
+        "wilson95_low": 0.2045621360158576,
+        "wilson95_high": 0.20810914497958377,
+        "mean_error_mm": 4.783568560356432,
+        "median_error_mm": 4.56811891279307,
+        "p95_error_mm": 8.551056674723366,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.5,
+      "trajectory": {
+        "n": 200000,
+        "successes": 66956,
+        "success_probability": 0.33478,
+        "wilson95_low": 0.33271497669542976,
+        "wilson95_high": 0.3368513700409302,
+        "mean_error_mm": 4.183989374607819,
+        "median_error_mm": 3.913579801259618,
+        "p95_error_mm": 8.235704472762972,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 38666,
+        "success_probability": 0.19333,
+        "wilson95_low": 0.19160516140622544,
+        "wilson95_high": 0.19506661896927088,
+        "mean_error_mm": 4.91369075833016,
+        "median_error_mm": 4.69584751162691,
+        "p95_error_mm": 8.770699452366927,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.6,
+      "trajectory": {
+        "n": 200000,
+        "successes": 64435,
+        "success_probability": 0.322175,
+        "wilson95_low": 0.3201303952692908,
+        "wilson95_high": 0.3242264356736531,
+        "mean_error_mm": 4.279454810675997,
+        "median_error_mm": 4.003466472122757,
+        "p95_error_mm": 8.410544724036836,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 36118,
+        "success_probability": 0.18059,
+        "wilson95_low": 0.1789102447203146,
+        "wilson95_high": 0.18228202504763555,
+        "mean_error_mm": 5.045419632949376,
+        "median_error_mm": 4.827171032098567,
+        "p95_error_mm": 8.98675606278298,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.7,
+      "trajectory": {
+        "n": 200000,
+        "successes": 62011,
+        "success_probability": 0.310055,
+        "wilson95_low": 0.30803163667220096,
+        "wilson95_high": 0.3120856598466097,
+        "mean_error_mm": 4.376405830052562,
+        "median_error_mm": 4.0959766546011895,
+        "p95_error_mm": 8.593950524249301,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 33740,
+        "success_probability": 0.1687,
+        "wilson95_low": 0.16706513638582504,
+        "wilson95_high": 0.17034759012280615,
+        "mean_error_mm": 5.178641075760533,
+        "median_error_mm": 4.957734421403904,
+        "p95_error_mm": 9.20958466774861,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.8,
+      "trajectory": {
+        "n": 200000,
+        "successes": 59767,
+        "success_probability": 0.298835,
+        "wilson95_low": 0.29683274992500935,
+        "wilson95_high": 0.30084497759720247,
+        "mean_error_mm": 4.474749704453115,
+        "median_error_mm": 4.188917112940266,
+        "p95_error_mm": 8.780251499926838,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 31513,
+        "success_probability": 0.157565,
+        "wilson95_low": 0.15597485006621575,
+        "wilson95_high": 0.15916830418063943,
+        "mean_error_mm": 5.313247142004389,
+        "median_error_mm": 5.090130304564044,
+        "p95_error_mm": 9.438998852400873,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 2.9,
+      "trajectory": {
+        "n": 200000,
+        "successes": 57626,
+        "success_probability": 0.28813,
+        "wilson95_low": 0.28614923432198625,
+        "wilson95_high": 0.29011890442049393,
+        "mean_error_mm": 4.574394047320194,
+        "median_error_mm": 4.283596999759958,
+        "p95_error_mm": 8.975306901900918,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 29479,
+        "success_probability": 0.147395,
+        "wilson95_low": 0.1458481397273817,
+        "wilson95_high": 0.14895540518833184,
+        "mean_error_mm": 5.44914140608843,
+        "median_error_mm": 5.223700138236133,
+        "p95_error_mm": 9.664854535580869,
+        "status": "supported_fail"
+      }
+    },
+    {
+      "target_sigma_mm": 3.0,
+      "trajectory": {
+        "n": 200000,
+        "successes": 55562,
+        "success_probability": 0.27781,
+        "wilson95_low": 0.27585122545286694,
+        "wilson95_high": 0.2797773097205492,
+        "mean_error_mm": 4.675260929691111,
+        "median_error_mm": 4.377298907893715,
+        "p95_error_mm": 9.172457486435448,
+        "status": "supported_fail"
+      },
+      "endpoint": {
+        "n": 200000,
+        "successes": 27558,
+        "success_probability": 0.13779,
+        "wilson95_low": 0.13628635893824348,
+        "wilson95_high": 0.13930755494250296,
+        "mean_error_mm": 5.586235516071078,
+        "median_error_mm": 5.358253613619574,
+        "p95_error_mm": 9.90111593378547,
+        "status": "supported_fail"
+      }
+    }
+  ]
+}

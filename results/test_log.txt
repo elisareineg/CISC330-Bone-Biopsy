@@ -1,0 +1,47 @@
+test_arbitrary_tip_axis_and_marker_geometry (test_calibration.CalibrationTests.test_arbitrary_tip_axis_and_marker_geometry) ... ok
+test_axis_recovers_signed_direction (test_calibration.CalibrationTests.test_axis_recovers_signed_direction) ... ok
+test_axis_requires_motion (test_calibration.CalibrationTests.test_axis_requires_motion) ... ok
+test_collinear_markers_rejected (test_calibration.CalibrationTests.test_collinear_markers_rejected) ... ok
+test_noisy_calibration_is_finite (test_calibration.CalibrationTests.test_noisy_calibration_is_finite) ... ok
+test_pivot_recovers_tip_and_unknown_pivot (test_calibration.CalibrationTests.test_pivot_recovers_tip_and_unknown_pivot) ... ok
+test_single_axis_pivot_is_unidentifiable (test_calibration.CalibrationTests.test_single_axis_pivot_is_unidentifiable) ... ok
+test_batched_registration_matches_scalar (test_error_analysis.TargetingTests.test_batched_registration_matches_scalar) ... ok
+test_invalid_simulation_inputs (test_error_analysis.TargetingTests.test_invalid_simulation_inputs) ... ok
+test_lateral_and_axial_displacement (test_error_analysis.TargetingTests.test_lateral_and_axial_displacement) ... ok
+test_seed_reproducibility (test_error_analysis.TargetingTests.test_seed_reproducibility) ... ok
+test_sweep_preserves_sigma_and_status (test_error_analysis.TargetingTests.test_sweep_preserves_sigma_and_status) ... ok
+test_target_only_matches_analytic_distributions (test_error_analysis.TargetingTests.test_target_only_matches_analytic_distributions) ... ok
+test_wilson_known_interval (test_error_analysis.TargetingTests.test_wilson_known_interval) ... ok
+test_zero_errors_exact_baseline (test_error_analysis.TargetingTests.test_zero_errors_exact_baseline) ... ok
+test_identical_click_is_ignored (test_interactive_demo.InteractiveTests.test_identical_click_is_ignored) ... ok
+test_reset_allows_second_plan (test_interactive_demo.InteractiveTests.test_reset_allows_second_plan) ... ok
+test_two_clicks_compute_plan (test_interactive_demo.InteractiveTests.test_two_clicks_compute_plan) ... ok
+test_calibration_to_ct_to_biopsy_plan (test_pipeline.PipelineTests.test_calibration_to_ct_to_biopsy_plan) ... ok
+test_backward_intersection (test_planning.PlanningTests.test_backward_intersection) ... ok
+test_bad_inputs (test_planning.PlanningTests.test_bad_inputs) ... ok
+test_general_3d_rigid_invariance (test_planning.PlanningTests.test_general_3d_rigid_invariance) ... ok
+test_intersecting_oblique_chord (test_planning.PlanningTests.test_intersecting_oblique_chord) ... ok
+test_line_distance_is_not_ray_distance (test_planning.PlanningTests.test_line_distance_is_not_ray_distance) ... ok
+test_miss (test_planning.PlanningTests.test_miss) ... ok
+test_normalization (test_planning.PlanningTests.test_normalization) ... ok
+test_surface_inward (test_planning.PlanningTests.test_surface_inward) ... ok
+test_surface_outward (test_planning.PlanningTests.test_surface_outward) ... ok
+test_tangency_tolerance (test_planning.PlanningTests.test_tangency_tolerance) ... ok
+test_tangent (test_planning.PlanningTests.test_tangent) ... ok
+test_tip_inside (test_planning.PlanningTests.test_tip_inside) ... ok
+test_axis_normalization_and_translation_invariance (test_registration.RegistrationTests.test_axis_normalization_and_translation_invariance) ... ok
+test_invalid_tip_axis_and_correspondences (test_registration.RegistrationTests.test_invalid_tip_axis_and_correspondences) ... ok
+test_marker_frame_input_matches_model_frame_input (test_registration.RegistrationTests.test_marker_frame_input_matches_model_frame_input) ... ok
+test_nonzero_tip_receives_rotation_and_translation (test_registration.RegistrationTests.test_nonzero_tip_receives_rotation_and_translation) ... ok
+test_pure_rotation (test_registration.RegistrationTests.test_pure_rotation) ... ok
+test_pure_translation (test_registration.RegistrationTests.test_pure_translation) ... ok
+test_reflection_is_not_accepted_as_rotation (test_registration.RegistrationTests.test_reflection_is_not_accepted_as_rotation) ... ok
+test_rotation_and_translation (test_registration.RegistrationTests.test_rotation_and_translation) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.460s
+
+OK
+Clicked plan: error=0.000 mm, core=20.000 mm, depth=40.000 mm
+Clicked plan: error=20.000 mm, core=0.000 mm, depth=N/A (not reachable)
+Clicked plan: error=0.000 mm, core=20.000 mm, depth=40.000 mm

@@ -1,0 +1,333 @@
+[
+  {
+    "case": {
+      "name": "intersects",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 1.0,
+      "tip": [
+        -5,
+        0.6,
+        0
+      ],
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "expected": {
+        "targeting_error_mm": 0.6,
+        "core_length_mm": 1.6,
+        "insertion_depth_mm": 5.8,
+        "status": "intersects"
+      }
+    },
+    "computed": {
+      "targeting_error_mm": 0.6,
+      "core_length_mm": 1.5999999999999996,
+      "insertion_depth_mm": 5.8,
+      "entry_depth_mm": 4.2,
+      "line_intersections_mm": [
+        4.2,
+        5.8
+      ],
+      "status": "intersects",
+      "harvest_possible": true,
+      "entry_point_ct_mm": [
+        -0.7999999999999998,
+        0.6,
+        0.0
+      ],
+      "end_point_ct_mm": [
+        0.7999999999999998,
+        0.6,
+        0.0
+      ]
+    },
+    "passed": true
+  },
+  {
+    "case": {
+      "name": "tangent",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 1.0,
+      "tip": [
+        -5,
+        1,
+        0
+      ],
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "expected": {
+        "targeting_error_mm": 1.0,
+        "core_length_mm": 0.0,
+        "insertion_depth_mm": 5.0,
+        "status": "contact"
+      }
+    },
+    "computed": {
+      "targeting_error_mm": 1.0,
+      "core_length_mm": 0.0,
+      "insertion_depth_mm": 5.0,
+      "entry_depth_mm": 5.0,
+      "line_intersections_mm": [
+        5.0,
+        5.0
+      ],
+      "status": "contact",
+      "harvest_possible": false,
+      "entry_point_ct_mm": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "end_point_ct_mm": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "passed": true
+  },
+  {
+    "case": {
+      "name": "miss",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 1.0,
+      "tip": [
+        -5,
+        2,
+        0
+      ],
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "expected": {
+        "targeting_error_mm": 2.0,
+        "core_length_mm": 0.0,
+        "insertion_depth_mm": null,
+        "status": "miss"
+      }
+    },
+    "computed": {
+      "targeting_error_mm": 2.0,
+      "core_length_mm": 0.0,
+      "insertion_depth_mm": null,
+      "entry_depth_mm": null,
+      "line_intersections_mm": null,
+      "status": "miss",
+      "harvest_possible": false,
+      "entry_point_ct_mm": null,
+      "end_point_ct_mm": null
+    },
+    "passed": true
+  },
+  {
+    "case": {
+      "name": "behind",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 1.0,
+      "tip": [
+        5,
+        0,
+        0
+      ],
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "expected": {
+        "targeting_error_mm": 0.0,
+        "core_length_mm": 0.0,
+        "insertion_depth_mm": null,
+        "status": "behind"
+      }
+    },
+    "computed": {
+      "targeting_error_mm": 0.0,
+      "core_length_mm": 0.0,
+      "insertion_depth_mm": null,
+      "entry_depth_mm": null,
+      "line_intersections_mm": [
+        -6.0,
+        -4.0
+      ],
+      "status": "behind",
+      "harvest_possible": false,
+      "entry_point_ct_mm": null,
+      "end_point_ct_mm": null
+    },
+    "passed": true
+  },
+  {
+    "case": {
+      "name": "inside",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 1.0,
+      "tip": [
+        0,
+        0,
+        0
+      ],
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "expected": {
+        "targeting_error_mm": 0.0,
+        "core_length_mm": 1.0,
+        "insertion_depth_mm": 1.0,
+        "status": "intersects"
+      }
+    },
+    "computed": {
+      "targeting_error_mm": 0.0,
+      "core_length_mm": 1.0,
+      "insertion_depth_mm": 1.0,
+      "entry_depth_mm": 0.0,
+      "line_intersections_mm": [
+        -1.0,
+        1.0
+      ],
+      "status": "intersects",
+      "harvest_possible": true,
+      "entry_point_ct_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "end_point_ct_mm": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "passed": true
+  },
+  {
+    "case": {
+      "name": "surface_inward",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 1.0,
+      "tip": [
+        -1,
+        0,
+        0
+      ],
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "expected": {
+        "targeting_error_mm": 0.0,
+        "core_length_mm": 2.0,
+        "insertion_depth_mm": 2.0,
+        "status": "intersects"
+      }
+    },
+    "computed": {
+      "targeting_error_mm": 0.0,
+      "core_length_mm": 2.0,
+      "insertion_depth_mm": 2.0,
+      "entry_depth_mm": 0.0,
+      "line_intersections_mm": [
+        0.0,
+        2.0
+      ],
+      "status": "intersects",
+      "harvest_possible": true,
+      "entry_point_ct_mm": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "end_point_ct_mm": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "passed": true
+  },
+  {
+    "case": {
+      "name": "surface_outward",
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "radius": 1.0,
+      "tip": [
+        1,
+        0,
+        0
+      ],
+      "axis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "expected": {
+        "targeting_error_mm": 0.0,
+        "core_length_mm": 0.0,
+        "insertion_depth_mm": 0.0,
+        "status": "contact"
+      }
+    },
+    "computed": {
+      "targeting_error_mm": 0.0,
+      "core_length_mm": 0.0,
+      "insertion_depth_mm": 0.0,
+      "entry_depth_mm": 0.0,
+      "line_intersections_mm": [
+        -2.0,
+        0.0
+      ],
+      "status": "contact",
+      "harvest_possible": false,
+      "entry_point_ct_mm": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "end_point_ct_mm": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    "passed": true
+  }
+]
