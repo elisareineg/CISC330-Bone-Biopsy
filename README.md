@@ -280,7 +280,7 @@ datasets are required.
 
 ## AI attribution
 
-Parts of this project were developed with help from Claude (Anthropic), an AI
+Parts of this project were developed with help from Claude (Anthropic) and ChatGPT, AI
 assistant. It was used to review the code against the assignment rubric,
 implement the spin-based tool-axis calibration with plane and circle fitting,
 compute the marker accuracy needed to meet the targeting requirement, and
