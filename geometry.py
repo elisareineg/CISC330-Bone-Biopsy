@@ -1,4 +1,4 @@
-"""Reusable geometric validation and line-fitting utilities."""
+"""Reusable geometric validation, fitting, distance, and intersection utilities."""
 import numpy as np
 
 def points(value, minimum=3):
@@ -13,13 +13,46 @@ def unit(vector):
         raise ValueError("Expected a finite nonzero 3-vector")
     return v / np.linalg.norm(v)
 
-def fit_line(samples):
+def fit_plane(samples):
+    """Total-least-squares plane through N >= 3 points.
+
+    Returns (centroid, unit normal, singular values). The normal is the right
+    singular vector with the smallest singular value; its sign is arbitrary.
+    Points that are identical or collinear do not define a plane.
+    """
     p = points(samples)
-    center = p.mean(axis=0)
-    _, s, vt = np.linalg.svd(p-center, full_matrices=False)
-    if s[0] < 1e-10:
-        raise ValueError("Line calibration requires nonzero translation")
-    return center, vt[0], s
+    centroid = p.mean(axis=0)
+    _, s, vt = np.linalg.svd(p-centroid, full_matrices=False)
+    if s[1] < 1e-10:
+        raise ValueError("Plane fit requires at least three noncollinear points")
+    return centroid, vt[2], s
+
+
+def fit_circle(samples):
+    """Least-squares circle through N >= 3 points lying (nearly) in a plane.
+
+    Fit the plane first, express the points in 2D in-plane coordinates (x, y),
+    then solve the algebraic (Kasa) circle x^2 + y^2 + D x + E y + F = 0 by
+    linear least squares. Centre (-D/2, -E/2), radius sqrt(cx^2 + cy^2 - F).
+    Returns (centre, radius, unit normal, radial residual RMS).
+    """
+    p = points(samples)
+    centroid, normal, _ = fit_plane(p)
+    _, _, vt = np.linalg.svd(p-centroid, full_matrices=False)
+    e1, e2 = vt[0], vt[1]
+    x, y = (p-centroid)@e1, (p-centroid)@e2
+    a = np.column_stack((x, y, np.ones(len(p))))
+    (d, e, f), _, rank, _ = np.linalg.lstsq(a, -(x**2+y**2), rcond=None)
+    if rank < 3:
+        raise ValueError("Circle fit requires at least three non-collinear points")
+    cx, cy = -d/2, -e/2
+    radius_squared = cx**2+cy**2-f
+    if radius_squared <= 0:
+        raise ValueError("Circle fit failed: points do not lie on a circle")
+    centre = centroid+cx*e1+cy*e2
+    radius = float(np.sqrt(radius_squared))
+    residual = np.linalg.norm(p-centre-np.outer((p-centre)@normal, normal), axis=1)-radius
+    return centre, radius, normal, float(np.sqrt(np.mean(residual**2)))
 
 def angle_degrees(a, b):
     # atan2 remains accurate near zero, unlike acos of a rounded dot product.

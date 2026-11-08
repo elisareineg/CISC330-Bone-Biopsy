@@ -49,15 +49,16 @@ def main():
     # Separate streams keep noise validation independent of calibration trials.
     exact_rng,noisy_rng,check_rng=[np.random.default_rng(s) for s in np.random.SeedSequence(SEED).spawn(3)]
     exact_pivot,_,_,pivot=pivot_observations(template,tip,exact_rng)
-    exact_axis,_,_=axis_observations(template,axis,exact_rng)
+    exact_axis,*_=axis_observations(template,axis,tip,exact_rng)
     exact_tip_result=calibrate_tip(template,exact_pivot)
-    exact_axis_result=calibrate_axis(template,exact_axis)
+    # The axis sign comes from the calibrated tip, never the ground truth
+    exact_axis_result=calibrate_axis(template,exact_axis,exact_tip_result['tip'])
     rows=[]
     example=None
     for trial in range(args.trials):
         po,*_=pivot_observations(template,tip,noisy_rng,sigma=MARKER_SIGMA_MM)
-        ao,*_=axis_observations(template,axis,noisy_rng,sigma=MARKER_SIGMA_MM)
-        tr=calibrate_tip(template,po); ar=calibrate_axis(template,ao)
+        ao,*_=axis_observations(template,axis,tip,noisy_rng,sigma=MARKER_SIGMA_MM)
+        tr=calibrate_tip(template,po); ar=calibrate_axis(template,ao,tr['tip'])
         rows.append([trial,float(np.linalg.norm(tr['tip']-tip)),angle_degrees(ar['axis'],axis)])
         if trial==0:
             example={'tip_marker_mm':tr['tip'], 'tip_model_mm':basis@tr['tip']+origin,
@@ -76,7 +77,7 @@ def main():
                  'p95':float(np.quantile(v,.95)),'max':float(v.max())}
            for name,v in zip(['tip_error_mm','axis_error_deg'],errors.T)}
     summary={'stage':2,'seed':SEED,'trials':args.trials,'poses_per_calibration':80,
-             'axis_translation_span_mm':100,'diagram_unit_to_mm':DIAGRAM_UNIT_TO_MM,
+             'axis_spin_span_deg':360,'diagram_unit_to_mm':DIAGRAM_UNIT_TO_MM,
              'marker_sigma_per_coordinate_mm':MARKER_SIGMA_MM,
              'noise_check':{'samples':len(noise),'fraction_below_1mm':float(np.mean(magnitudes<1)),
                             'p95_magnitude_mm':float(np.quantile(magnitudes,.95))},
@@ -104,7 +105,8 @@ def main():
     report=f'''# Stage 2 calibration results
 
 Seed: {SEED}. Independent calibration repetitions: {args.trials}.
-Each calibration uses 80 poses. Axis calibration uses 100 mm of guided translation.
+Each calibration uses 80 poses. Axis calibration spins the tool through a full turn
+about its shaft, with the tip held in a divot.
 Diagram coordinates are assumed to be centimetres; calculations use millimetres.
 
 | Validation | Result |
@@ -126,8 +128,9 @@ Diagram coordinates are assumed to be centimetres; calculations use millimetres.
 Exact-data errors are at floating-point precision. With noisy marker observations,
 the recovered poses are imperfect. The tip is far from the marker triangle, so
 small orientation errors contribute to tip-position uncertainty. Multiple distinct
-pivot poses reduce random uncertainty. Axis calibration benefits from a long
-translation baseline and averaging the orientation over many observations.
+pivot poses reduce random uncertainty. Axis calibration benefits from the full
+spin and from the markers' distance from the shaft (circle radii of 20 to 80 mm):
+larger circles define the plane, and therefore the axis, more precisely.
 
 The empirical 95th percentiles describe repeated calibrations for this geometry,
 pose count, motion range, noise distribution, and estimator. They are not exact
@@ -136,9 +139,9 @@ motions changes the results. Pose recovery and pivot fitting involve noisy
 rotations, so finite-sample errors and estimator bias are both possible.
 
 The simulated tracker noise is isotropic and independent across markers, poses,
-and repetitions. Marker-template uncertainty, guide misalignment, tip slippage,
+and repetitions. Marker-template uncertainty, sleeve wobble, tip slippage,
 correlated tracker error, and tool bending are excluded. Axis calibration assumes
-constant orientation and a guide aligned with the shaft. These constraints are
+the tool turns only about its own shaft, with no tilt or axial sliding. These constraints are
 part of the experiment, not conclusions inferred solely from the marker data.
 
 Stage 5 will examine targeting error. Calibration errors in this stage do not

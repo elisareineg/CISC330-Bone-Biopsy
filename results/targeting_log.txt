@@ -32,7 +32,7 @@ Target sigma is per coordinate, not a radial displacement bound.
 
 ## Interpretation and scope
 
-Under the approved coordinate scale, the 60 mm marker spacing is small
+Under the assumed centimetre scale, the 60 mm marker spacing is small
 relative to the roughly 300 mm marker-to-target lever arm. Submillimetre
 marker localization errors become angular uncertainty, amplified at the
 target. The 1 mm marker bound is not a 1 mm needle-target error bound.

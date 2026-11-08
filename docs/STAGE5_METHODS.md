@@ -19,7 +19,7 @@ model. No such control loop is asserted here.
 
 Ground-truth model and CT frames coincide. P=(0,0,0), v=(0,-1,0), and the
 planned target is C=P+100v=(0,-100,0) mm. Markers are (20,180,0), (80,180,0),
-and (20,240,0) mm under the approved centimetre interpretation of Figure 2.
+and (20,240,0) mm under the centimetre interpretation of Figure 2.
 No marker positions, scale, or noise levels are tuned to satisfy the requirement.
 
 The target is a point for this task; tumor radius and tissue-core changes are
@@ -111,7 +111,7 @@ null for maximum_supported_grid_sigma_mm, with an explicit conclusion string.
 The finite grid documents [0,3] mm; it is not a theorem about every unsampled
 sigma or a continuous optimized maximum. If a future configuration passes the
 baseline, refine and independently validate any crossing before reporting a
-continuous maximum; this checkpoint only reports a supported grid candidate
+continuous maximum; the current code only reports a supported grid candidate
 in that hypothetical case.
 
 ## Why marker noise alone fails
@@ -128,7 +128,17 @@ Improving accuracy would require changing measurement precision, marker layout,
 or the observation protocol. Those are potential design changes, not changes
 made to the assigned simulation to force a favorable result. Confirming the
 unlabelled figure units with the teaching team remains relevant to physical
-interpretation; this package consistently uses the approved assumption.
+interpretation; this project consistently uses the centimetre assumption.
+
+## Marker accuracy that would meet the requirement
+
+To give the result a constructive counterpart, the zero-displacement simulation
+was repeated while lowering the marker noise, using bisection on the
+per-coordinate marker sigma (200,000 trials per evaluation, seed 335). The
+requirement is met only when marker sigma is at most 0.190 mm per coordinate,
+that is, when 95% of 3D marker errors are below about 0.53 mm: roughly half the
+1 mm specified in the assignment. Any target displacement would require even
+more accurate marker localization.
 
 ## Independent analytic checks
 
@@ -148,7 +158,7 @@ If markers were perfect, the theoretical target-only sigma limits would be:
 These benchmarks are recorded in JSON only as diagnostics, not as the answer
 with actual marker noise. Additional tests cover exact zero-error registration,
 reproducibility, Wilson interval arithmetic, sweep classification, and invalid
-inputs. The cumulative suite contains 35 passing tests.
+inputs. The full suite contains 42 passing tests.
 
 ## Files, execution, and limitations
 

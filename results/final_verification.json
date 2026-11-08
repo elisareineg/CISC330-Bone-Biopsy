@@ -14,9 +14,9 @@
   "documentation_links": {
     "verified": true
   },
-  "test_count": 39,
-  "python_version": "3.12.14",
-  "scope": "All six workflow stages; simulation requirement fails as reported, not a software failure.",
+  "test_count": 42,
+  "python_version": "3.12.2",
+  "scope": "All four assignment tasks; the targeting requirement fails as reported, not a software failure.",
   "interactive_verification": {
     "click_handlers": "3 tests pass",
     "plot_preview": "rendered and visually checked",

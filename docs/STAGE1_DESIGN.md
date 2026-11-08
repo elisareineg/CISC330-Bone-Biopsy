@@ -1,24 +1,19 @@
-# Stage 1: approved design and project plan
+# Design: geometry, frames, and methods
 
-This document consolidates the Stage 1 design approved in the conversation.
-Stage 1 originally established the plan in the conversation; it did not have a
-separate downloadable README. This file preserves those decisions within the
-cumulative directory. The master README contains their current implementation.
-
-> Historical design: pending labels below describe the original plan. Stages 1-6 are
-> now complete; consult the master README and PROGRESS.md for current status.
+This document records the design decisions behind the project: the tool geometry,
+coordinate frames, noise model, and the method chosen for each assignment task.
+The README describes the implementation and results.
 
 ## Assignment structure
 
 The grading categories are tool calibration (30%), CT registration (20%), biopsy
-planning (20%), and targeting-error simulation (30%). Our six workflow stages
-separate design and final verification from these four implementation tasks.
+planning (20%), and targeting-error simulation (30%).
 
 ## Geometry and units
 
 Figure 2 specifies M1=(2,18,0), M2=(8,18,0), M3=(2,24,0), tip P=(0,0,0),
 and insertion direction v=(0,-1,0). Its coordinates have no explicit unit label.
-The approved assumption is centimetres, converted to millimetres internally.
+We assume centimetres and convert to millimetres internally.
 DIAGRAM_UNIT_TO_MM=10 in config.py controls that assumption.
 
 In mm the markers are (20,180,0), (80,180,0), (20,240,0). The tool tip remains
@@ -44,9 +39,13 @@ Tip: hold the tip fixed at an unknown pivot while tilting around multiple axes.
 Estimate each pose from markers and solve R_i p + t_i = c for both p and c.
 Check observability and validate exact and noisy recovery.
 
-Axis: translate along a shaft-aligned straight guide at fixed orientation.
-Fit a line to observed marker-centroid motion and map the direction back into
-the marker frame. Ordered forward motion resolves the direction sign.
+Axis: keep the tip in the divot and spin the tool about its own shaft (for
+example inside a sleeve). Each marker moves on a circle in a plane perpendicular
+to the shaft. Fit a plane to the marker trajectories (its normal is the axis
+direction) and a circle to each marker (its centre lies on the shaft). Map the
+direction back into the marker frame. A spin cannot reveal which way the needle
+points, so the calibrated tip fixes the sign: the axis points from the markers
+toward the tip.
 
 Ground truth belongs to the simulator and validation, not the solver inputs.
 
@@ -64,7 +63,7 @@ Validate pure translation, pure rotation, and combined rotation/translation
 against independently worked predictions. Transform the tip as a point and
 axis as a direction. Retain reusable geometry and transformation modules.
 
-## Biopsy planning plan (Stage 4, pending)
+## Biopsy planning plan
 
 Inputs: tumor centre/radius and registered tip/direction in CT coordinates.
 Compute perpendicular distance from the needle axis to the tumour centre,
@@ -73,7 +72,7 @@ to the far end of that segment. Test intersection, tangency, and complete miss,
 plus backward-only and other geometric edge cases. A backward-only intersection
 cannot be harvested by forward insertion. Clearly define tangent/no-core output.
 
-## Targeting simulation plan (Stage 5, pending)
+## Targeting simulation plan
 
 Use identical model and CT frames for the baseline. With the initial tip at
 (0,0,0) and insertion direction (0,-1,0), the planned 100 mm target is
@@ -87,22 +86,7 @@ The assignment defines compound error as distance to the trajectory but also
 mentions endpoint accuracy. Report trajectory distance and separately examine
 endpoint error after 100 mm insertion, with explicit interpretation.
 
-## Project organization and final stage
+## Tools
 
-config.py, transforms.py, geometry.py, registration.py, calibration.py,
-simulation.py, demo_flow.py, tests/, results/, README.md, and requirements.txt
-support completed work. planning.py and error_analysis.py are planned additions,
-not implemented placeholders. Stage 6 will review every rubric item and package
-all code, explanations, validation outputs, and dependencies.
-
-The initial design suggested pytest. The implementation uses Python's built-in
-unittest instead, preserving the planned validation without another dependency.
-NumPy, SciPy, and Matplotlib are the runtime dependencies.
-
-## Cumulative delivery convention
-
-Each checkpoint includes all completed stages in one BoneBiopsyPlanning folder.
-The master README covers the full project to date. Stage-specific derivations
-and results remain in place, and PROGRESS.md identifies completed and pending
-work. Prior README snapshots are historical references, not competing setup
-instructions. Review occurs before starting the next workflow stage.
+Tests use Python's built-in unittest (pytest also runs them). NumPy, SciPy, and
+Matplotlib are the runtime dependencies.

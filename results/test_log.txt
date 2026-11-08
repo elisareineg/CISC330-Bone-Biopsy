@@ -1,10 +1,13 @@
 test_arbitrary_tip_axis_and_marker_geometry (test_calibration.CalibrationTests.test_arbitrary_tip_axis_and_marker_geometry) ... ok
-test_axis_recovers_signed_direction (test_calibration.CalibrationTests.test_axis_recovers_signed_direction) ... ok
 test_axis_requires_motion (test_calibration.CalibrationTests.test_axis_requires_motion) ... ok
 test_collinear_markers_rejected (test_calibration.CalibrationTests.test_collinear_markers_rejected) ... ok
 test_noisy_calibration_is_finite (test_calibration.CalibrationTests.test_noisy_calibration_is_finite) ... ok
 test_pivot_recovers_tip_and_unknown_pivot (test_calibration.CalibrationTests.test_pivot_recovers_tip_and_unknown_pivot) ... ok
+test_short_spin_rejected (test_calibration.CalibrationTests.test_short_spin_rejected) ... ok
 test_single_axis_pivot_is_unidentifiable (test_calibration.CalibrationTests.test_single_axis_pivot_is_unidentifiable) ... ok
+test_spin_recovers_signed_axis (test_calibration.CalibrationTests.test_spin_recovers_signed_axis) ... ok
+test_circle_fit_recovers_centre_radius_and_normal (test_calibration.FittingTests.test_circle_fit_recovers_centre_radius_and_normal) ... ok
+test_plane_fit_rejects_collinear_points (test_calibration.FittingTests.test_plane_fit_rejects_collinear_points) ... ok
 test_batched_registration_matches_scalar (test_error_analysis.TargetingTests.test_batched_registration_matches_scalar) ... ok
 test_invalid_simulation_inputs (test_error_analysis.TargetingTests.test_invalid_simulation_inputs) ... ok
 test_lateral_and_axial_displacement (test_error_analysis.TargetingTests.test_lateral_and_axial_displacement) ... ok
@@ -39,7 +42,7 @@ test_reflection_is_not_accepted_as_rotation (test_registration.RegistrationTests
 test_rotation_and_translation (test_registration.RegistrationTests.test_rotation_and_translation) ... ok
 
 ----------------------------------------------------------------------
-Ran 39 tests in 0.460s
+Ran 42 tests in 0.853s
 
 OK
 Clicked plan: error=0.000 mm, core=20.000 mm, depth=40.000 mm

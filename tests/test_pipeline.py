@@ -18,9 +18,9 @@ class PipelineTests(unittest.TestCase):
         true_axis=basis.T@AXIS_MODEL
         rng=np.random.default_rng(606)
         pivot,*_=pivot_observations(template,true_tip,rng)
-        axial,*_=axis_observations(template,true_axis,rng)
+        axial,*_=axis_observations(template,true_axis,true_tip,rng)
         calibrated_tip=calibrate_tip(template,pivot)['tip']
-        calibrated_axis=calibrate_axis(template,axial)['axis']
+        calibrated_axis=calibrate_axis(template,axial,calibrated_tip)['axis']
         case=registration_cases()[2]
         pose=register_tool(template,calibrated_tip,calibrated_axis,case['markers_ct'])
         # Cyclic rotation + (10,-20,30) maps model target (0,-100,0)

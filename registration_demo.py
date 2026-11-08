@@ -14,7 +14,7 @@ def run_registration(output=None):
     records=[]
     lines=['# Stage 3 CT registration results','',
            f'Diagram unit to mm: {DIAGRAM_UNIT_TO_MM:g}. All positions and residuals are in mm.',
-           'Expected values are hand-derived in STAGE3_DERIVATIONS.md.', '',
+           'Expected values are hand-derived in docs/STAGE3_DERIVATIONS.md.', '',
            '| Case | Tip error (mm) | Axis error (degrees) | Marker RMS (mm) | Passed |',
            '|---|---:|---:|---:|---|']
     for case in registration_cases():

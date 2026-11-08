@@ -1,6 +1,6 @@
 # CT-guided Bone Biopsy Planning: final report
 
-Author: Serhat Yaylacam
+Authors: Serhat Yaylacam, Akshay Kapal, Elisa Goncalves
 
 ## Scope and assumptions
 
@@ -10,7 +10,7 @@ target localization errors. Source code, tests, reproducible outputs, detailed
 hand calculations, and the original assignment are included in this directory.
 
 The unlabelled figure coordinates are interpreted as centimetres, as documented
-and approved during project setup, then converted to millimetres. Marker positions
+in config.py, then converted to millimetres. Marker positions
 are (20,180,0), (80,180,0), and (20,240,0) mm. The model tip is (0,0,0), and
 insertion follows (0,-1,0). Changing the physical scale changes uncertainty.
 
@@ -22,11 +22,14 @@ through diverse orientations. Stacking R_i p+t_i=c yields a least-squares
 estimate of both the unknown local tip and unknown tracker-frame pivot.
 Rank checks reject unidentifiable motions.
 
-Axis calibration translates the tool through a shaft-aligned guide at constant
-orientation. A line fitted to the marker-centroid trajectory identifies the
-tracker-frame shaft direction; the measured mean orientation maps it into the
-marker frame. Ordered forward motion determines the sign. Each calibration
-uses 80 poses, and the axis translation spans 100 mm.
+Axis calibration keeps the tip in the divot and spins the tool through a full
+turn about its own shaft. Each marker then moves on a circle in a plane
+perpendicular to the shaft. A plane fitted to the marker trajectories gives the
+shaft direction (its normal), and a circle fitted to each marker gives a centre
+on the shaft. Because the shaft is unchanged by the spin, the measured rotations
+map the direction into the marker frame. A spin cannot show which way the needle
+points, so the calibrated tip fixes the sign: the axis points from the markers
+toward the tip. Each calibration uses 80 poses.
 
 Exact observations recover the known parameters to numerical precision. For
 noisy observations, each marker coordinate has Gaussian standard deviation
@@ -38,9 +41,9 @@ Across 500 independent calibration repetitions:
 | Error | Mean | Empirical 95th percentile |
 |---|---:|---:|
 | Tip position | 0.348836 mm | 0.617251 mm |
-| Axis direction | 0.076342 degrees | 0.151196 degrees |
+| Axis direction | 0.053707 degrees | 0.107135 degrees |
 
-See README Stage 2 and results/STAGE2_RESULTS.md for motions, conditioning,
+See the README (Task 1) and results/STAGE2_RESULTS.md for motions, conditioning,
 noise verification, plots, and limitations. True tip/axis values are not passed
 to the calibration solvers.
 
@@ -50,7 +53,7 @@ A proper rigid least-squares transform is fitted to corresponding markers by
 SVD. The tip is mapped with R p+t, while the axis receives rotation only.
 Three independent reference cases cover pure translation, pure rotation, and
 combined rotation/translation. All match their hand calculations to numerical
-precision. STAGE3_DERIVATIONS.md gives expected marker, tip, and axis coordinates
+precision. docs/STAGE3_DERIVATIONS.md gives expected marker, tip, and axis coordinates
 before fitting; results/STAGE3_RESULTS.md records measured errors.
 
 ## Biopsy planning
@@ -98,9 +101,15 @@ sigma starting from zero** under these assumptions. Reporting a maximum of zero
 would be misleading because zero also fails. The output uses null with an
 explicit explanation. The finite sweep is not a claim of continuous optimization.
 
+**What would be needed.** Repeating the zero-displacement simulation with lower
+marker noise shows the requirement is met only when marker sigma is at most
+0.190 mm per coordinate, that is, when 95% of 3D marker errors are below about
+0.53 mm: roughly half the 1 mm specified. Any target displacement would require
+even more accurate marker localization (see docs/STAGE5_METHODS.md).
+
 The approximately 300 mm marker-to-target distance amplifies angular uncertainty
 from a marker triangle with 60 mm spacings. Marker localization within 1 mm does
-not imply target localization within 1 mm. The low Stage 2 calibration errors
+not imply target localization within 1 mm. The low calibration errors (Task 1)
 also benefit from 80 observations; each CT trial here uses one three-marker set.
 
 Calibration uncertainty, systematic bias, correlated tracking errors, and tool
@@ -109,16 +118,23 @@ not a real control loop. See docs/STAGE5_METHODS.md and the full sweep outputs.
 
 ## Verification and reproducibility
 
-The final cumulative suite contains 39 tests, including an end-to-end
-calibration-to-registration-to-planning check. The complete demo reproduces all
-four computational tasks. START_HERE.md gives commands, README.md retains the
-full cumulative technical guide, and RUBRIC_REVIEW.md maps every rubric row to
-code and evidence. Earlier documentation remains in docs/history.
+The suite contains 42 tests, including an end-to-end
+calibration-to-registration-to-planning check. The batch demo reproduces all
+four computational tasks. README.md explains how to run everything, and
+docs/RUBRIC_REVIEW.md maps every rubric row to code and evidence.
 
-## Guided demonstration update
+## Guided demonstration
 
-The no-argument demo now provides a live guided walkthrough with plot windows
-and a two-click planning exercise. Three additional tests verify click handling
-and reset behavior. The full batch workflow remains available through explicit
---stage commands. GUI event handling was tested headlessly; native Windows
-window rendering remains to be checked on the user machine.
+Running `python demo_flow.py` with no arguments gives a live walkthrough with
+plot windows and a two-click planning exercise; three tests verify the click
+handling and reset behaviour. Explicit `--stage` commands run the calculations
+without windows.
+
+## AI attribution
+
+Parts of this project were developed with help from Claude (Anthropic), an AI
+assistant. It was used to review the code against the assignment rubric,
+implement the spin-based tool-axis calibration with plane and circle fitting,
+compute the marker accuracy needed to meet the targeting requirement, and
+reorganise the documentation. All AI-assisted code and text were reviewed by
+the team and tested with the full test suite and the reproducible results above.
