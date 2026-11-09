@@ -69,33 +69,54 @@ def vector3(value):
 
 
 def point_line_distance(point, origin, direction):
-    """Shortest distance to the infinite axis, not the forward ray."""
-    return float(np.linalg.norm(np.cross(vector3(point)-vector3(origin), unit(direction))))
+    """Calculate the perpendicular distance from a point to an infinite line."""
+
+    displacement = vector3(point) - vector3(origin)
+    axis = unit(direction)
+
+    return float(np.linalg.norm(np.cross(displacement, axis)))
+
 
 
 def intersect_line_sphere(origin, direction, center, radius, tolerance=1e-9):
-    """Return signed distances (near, far) along the unit direction, or None.
+    """Return signed line-sphere intersection distances, or None.
 
-    Distances and tolerance have the input length unit (mm in this project).
-    Tangencies within tolerance return a repeated root. These are LINE roots:
-    the caller must restrict them to forward insertion (distance >= 0).
+    Distances use the input length unit. Tangencies within tolerance
+    return repeated roots; the caller handles forward-ray restrictions.
     """
-    p, c, v = vector3(origin), vector3(center), unit(direction)
+
+    origin = vector3(origin)
+    center = vector3(center)
+    axis = unit(direction)
+
     radius = float(radius)
     tolerance = float(tolerance)
+
     if not np.isfinite(radius) or radius <= 0:
-        raise ValueError('Sphere radius must be finite and positive')
+        raise ValueError("Sphere radius must be finite and positive")
+
     if not np.isfinite(tolerance) or tolerance < 0:
-        raise ValueError('Tolerance must be finite and nonnegative')
-    delta = c-p
-    along = float(np.dot(delta, v))
-    distance = point_line_distance(c, p, v)
+        raise ValueError("Tolerance must be finite and nonnegative")
+
+    # Project the sphere center onto the needle axis
+    displacement = center - origin
+    along_axis = float(np.dot(displacement, axis))
+
+    # Find the perpendicular distance from the center to the axis
+    distance = point_line_distance(center, origin, axis)
+
+    # No intersection if the line passes outside the sphere
     if distance > radius + tolerance:
         return None
-    if abs(distance-radius) <= tolerance:
-        return along, along
-    # Product form avoids subtracting two large squared quantities near tangency.
-    half_chord = float(np.sqrt(max(0., (radius-distance)*(radius+distance))))
-    return along-half_chord, along+half_chord
 
-# Author: Serhat Yaylacam
+    # Tangent: both intersection distances are equal
+    if abs(distance - radius) <= tolerance:
+        return along_axis, along_axis
+
+    # Calculate the distance from the closest point to each intersection
+    half_chord = float(np.sqrt(max(0.0, (radius - distance) * (radius + distance))))
+
+    return along_axis - half_chord, along_axis + half_chord
+
+
+# Author: Serhat Yaylacam, Akshay Kapal

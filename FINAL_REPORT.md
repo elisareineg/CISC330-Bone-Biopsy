@@ -38,10 +38,10 @@ of 1 mm, rather than a separate 1 mm bound on each coordinate.
 
 Across 500 independent calibration repetitions:
 
-| Error | Mean | Empirical 95th percentile |
-|---|---:|---:|
-| Tip position | 0.348836 mm | 0.617251 mm |
-| Axis direction | 0.053707 degrees | 0.107135 degrees |
+| Error          |             Mean | Empirical 95th percentile |
+| -------------- | ---------------: | ------------------------: |
+| Tip position   |      0.348836 mm |               0.617251 mm |
+| Axis direction | 0.053707 degrees |          0.107135 degrees |
 
 See the README (Task 1) and results/STAGE2_RESULTS.md for motions, conditioning,
 noise verification, plots, and limitations. True tip/axis values are not passed
@@ -66,11 +66,11 @@ unreachable. A tangent gives zero tissue core and a finite contact depth.
 
 For a unit sphere at the origin and direction +x:
 
-| Initial tip | Error (mm) | Core (mm) | Depth (mm) |
-|---|---:|---:|---:|
-| (-5,0.6,0) | 0.6 | 1.6 | 5.8 |
-| (-5,1,0) | 1 | 0 | 5, contact only |
-| (-5,2,0) | 2 | 0 | None |
+| Initial tip | Error (mm) | Core (mm) |      Depth (mm) |
+| ----------- | ---------: | --------: | --------------: |
+| (-5,0.6,0)  |        0.6 |       1.6 |             5.8 |
+| (-5,1,0)    |          1 |         0 | 5, contact only |
+| (-5,2,0)    |          2 |         0 |            None |
 
 All seven reference scenarios pass, including behind-only, inside, and initial
 surface cases. See docs/STAGE4_DERIVATIONS.md for full calculations. This
@@ -90,10 +90,10 @@ levels, while individual trials at a fixed level remain independent. Pointwise
 Wilson intervals describe uncertainty in the estimated success probability.
 A separate 200,000-trial baseline provides independent confirmation.
 
-| Baseline metric, sigma_target=0 | Fraction within 3 mm | 95% Wilson interval | Error p95 |
-|---|---:|---|---:|
-| Trajectory distance | 0.621670 | [0.619542, 0.623793] | 5.639103 mm |
-| Endpoint distance | 0.617805 | [0.615673, 0.619932] | 5.649044 mm |
+| Baseline metric, sigma_target=0 | Fraction within 3 mm | 95% Wilson interval  |   Error p95 |
+| ------------------------------- | -------------------: | -------------------- | ----------: |
+| Trajectory distance             |             0.621670 | [0.619542, 0.623793] | 5.639103 mm |
+| Endpoint distance               |             0.617805 | [0.615673, 0.619932] | 5.649044 mm |
 
 The independent baseline gives 0.624400 trajectory success, again far below
 0.95. All sampled sigma levels fail. Therefore there is **no feasible target
@@ -132,9 +132,10 @@ without windows.
 
 ## AI attribution
 
-Parts of this project were developed with help from Claude (Anthropic), an AI
-assistant. It was used to review the code against the assignment rubric,
-implement the spin-based tool-axis calibration with plane and circle fitting,
-compute the marker accuracy needed to meet the targeting requirement, and
-reorganise the documentation. All AI-assisted code and text were reviewed by
-the team and tested with the full test suite and the reproducible results above.
+Parts of this project were developed with assistance from Claude (Anthropic) and ChatGPT (OpenAI).
+
+Claude was used to review the code against the assignment rubric, implement the spin-based tool-axis calibration with plane and circle fitting, compute the marker accuracy needed to meet the targeting requirement, and reorganize the documentation.
+
+ChatGPT was used to help with the implementation and refinement of the functions related to rigid registration and biopsy planning. It was also used to assist with code review, debugging, and test verification.
+
+All AI-assisted code and text were reviewed by the team and tested with the full test suite and the reproducible results above.
