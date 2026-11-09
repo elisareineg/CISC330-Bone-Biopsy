@@ -1,39 +1,68 @@
 """Forward biopsy planning for a point tip and straight axis through a sphere."""
 from geometry import vector3, unit, point_line_distance, intersect_line_sphere
 
-
 def plan_biopsy(tumor_center, tumor_radius, tip_ct, axis_ct, tolerance=1e-9):
-    """Return targeting error, reachable core length, and far-end insertion depth.
+    """Calculate targeting error, tissue core length, and insertion depth.
 
-    All distances are mm when inputs are mm. The direction is normalized, so
-    insertion distances do not depend on the input vector's magnitude.
-    For a tangent, depth is distance to contact and core length is zero.
-    For a miss/behind-only sphere, depth is None (JSON null), not zero.
-    A tip inside the sphere can harvest only the forward portion of the chord.
-    """
-    p, c, v = vector3(tip_ct), vector3(tumor_center), unit(axis_ct)
-    roots = intersect_line_sphere(p, v, c, tumor_radius, tolerance)
-    out = {'targeting_error_mm': point_line_distance(c,p,v),
-           'core_length_mm': 0., 'insertion_depth_mm': None,
-           'entry_depth_mm': None, 'line_intersections_mm': roots,
-           'status': 'miss', 'harvest_possible': False,
-           'entry_point_ct_mm': None, 'end_point_ct_mm': None}
-    if roots is None:
-        return out
-    near, far = roots
+    Distances are in mm when inputs are in mm. The needle advances
+    only forward. Misses and behind-only intersections have no
+    insertion depth; tangencies have zero core length."""
+
+    tip = vector3(tip_ct)
+    center = vector3(tumor_center)
+    axis = unit(axis_ct)
+
+    # Calculate targeting error and line-sphere intersections
+    targeting_error = point_line_distance(center, tip, axis)
+    intersections = intersect_line_sphere(
+        tip, axis, center, tumor_radius, tolerance
+    )
+
+    # Default result for a trajectory that misses the tumor
+    result = {
+        "targeting_error_mm": targeting_error,
+        "core_length_mm": 0.0,
+        "insertion_depth_mm": None,
+        "entry_depth_mm": None,
+        "line_intersections_mm": intersections,
+        "status": "miss",
+        "harvest_possible": False,
+        "entry_point_ct_mm": None,
+        "end_point_ct_mm": None
+    }
+
+    # No intersection with the infinite needle axis
+    if intersections is None:
+        return result
+
+    near, far = intersections
+
+    # Tumor lies entirely behind the needle tip
     if far < -tolerance:
-        out['status'] = 'behind'
-        return out
-    # Values within tolerance of zero are treated as contact at the initial tip.
-    end = max(0., far)
-    start = max(0., near)
-    if end < start:
-        end = start
-    length = end-start
-    out.update(core_length_mm=length, insertion_depth_mm=end, entry_depth_mm=start,
-               entry_point_ct_mm=p+start*v, end_point_ct_mm=p+end*v,
-               harvest_possible=bool(length > 0),
-               status='intersects' if length > 0 else 'contact')
-    return out
+        result["status"] = "behind"
+        return result
 
-# Author: Serhat Yaylacam
+    # Restrict the intersection to the forward needle trajectory
+    entry_depth = max(0.0, near)
+    end_depth = max(0.0, far)
+
+    if end_depth < entry_depth:
+        end_depth = entry_depth
+
+    # Length of the needle trajectory inside the tumor
+    core_length = end_depth - entry_depth
+
+    result.update({
+        "core_length_mm": core_length,
+        "insertion_depth_mm": end_depth,
+        "entry_depth_mm": entry_depth,
+        "entry_point_ct_mm": tip + entry_depth * axis,
+        "end_point_ct_mm": tip + end_depth * axis,
+        "harvest_possible": bool(core_length > 0),
+        "status": "intersects" if core_length > 0 else "contact"
+    })
+
+    return result
+
+
+# Author: Akshay Kapal, Serhat Yaylacam
